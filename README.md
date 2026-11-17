@@ -1,4 +1,5 @@
 # polyglot
+<<<<<<< HEAD
 > Polyglot is a configurable framework for bidirectional communication. It separates message handling from input sources and transports, allowing applications to receive requests, process commands, and send responses through text or binary protocols.
 
 ## Build and check headers
@@ -12,3 +13,6 @@ ctest --test-dir build -C Debug --output-on-failure
 ```
 
 In an IDE with CMake support, configure this folder and build the `polyglot_tests` target. Compiler errors will appear in the build output. Add uses of new templates to `tests/compile_check.cpp` when you want the compiler to check their instantiation.
+=======
+polyglot is a configurable framework for bidirectional communication. It separates message handling from input sources and transports, allowing applications to receive requests, process commands, and send responses through text or binary protocols.
+>>>>>>> 63b49c7003122c49cb114f1cab0e078d76455e93
