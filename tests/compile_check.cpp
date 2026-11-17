@@ -10,11 +10,18 @@
 #include <polyglot/codec/ascii_binary.hpp>
 #include <polyglot/codec/ascii_float.hpp>
 #include <polyglot/codec/ascii_text.hpp>
+#include <polyglot/version.hpp>
 #include <charconv>
 #include <cstdint>
 #include <array>
 #include <span>
+#include <string_view>
 
+static_assert(std::string_view{polyglot::version::str()} == POLYGLOT_PROJECT_VERSION);
+static_assert(polyglot::version::major() == POLYGLOT_PROJECT_VERSION_MAJOR);
+static_assert(polyglot::version::minor() == POLYGLOT_PROJECT_VERSION_MINOR);
+static_assert(polyglot::version::patch() == POLYGLOT_PROJECT_VERSION_PATCH);
+static_assert(polyglot::version::tweak() == POLYGLOT_PROJECT_VERSION_TWEAK);
 
 namespace field = polyglot::schema::field;
 

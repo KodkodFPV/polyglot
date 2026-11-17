@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
 project(polyglot VERSION 1.0.0 LANGUAGES CXX)
 
+set(POLYGLOT_VERSION_TWEAK "${PROJECT_VERSION_TWEAK}")
+if(POLYGLOT_VERSION_TWEAK STREQUAL "")
+  set(POLYGLOT_VERSION_TWEAK 0)
+endif()
+
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.hpp.in"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/polyglot/version.hpp"
+  @ONLY
+)
+
 add_library(polyglot INTERFACE)
 target_compile_features(polyglot INTERFACE cxx_std_23)
 target_include_directories(polyglot INTERFACE
@@ -21,6 +32,12 @@ if(BUILD_TESTING)
 
   add_executable(polyglot_tests tests/compile_check.cpp)
   target_link_libraries(polyglot_tests PRIVATE polyglot Catch2::Catch2WithMain)
+  target_compile_definitions(polyglot_tests PRIVATE
+    "POLYGLOT_PROJECT_VERSION=\"${PROJECT_VERSION}\""
+    POLYGLOT_PROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
+    POLYGLOT_PROJECT_VERSION_MINOR=${PROJECT_VERSION_MINOR}
+    POLYGLOT_PROJECT_VERSION_PATCH=${PROJECT_VERSION_PATCH}
+    POLYGLOT_PROJECT_VERSION_TWEAK=${POLYGLOT_VERSION_TWEAK})
   catch_discover_tests(polyglot_tests)
 
   function(add_polyglot_test name)
